@@ -14,68 +14,30 @@
   </ion-header>
 
   <ion-accordion-group>
-    <ion-accordion value="first">
-      <ion-item slot="header" color="light">
-        <ion-label>Voyage 1</ion-label>
-      </ion-item>
-      <div class="ion-padding" slot="content">
-        <!-- début check list-->
-        <ion-list>
-          <ion-item>
-            <ion-label>test</ion-label>
-            <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
-          </ion-item>
-          <ion-item>
-            <ion-label>test</ion-label>
-            <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
-          </ion-item>
-          <ion-item>
-            <ion-label>test</ion-label>
-            <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
-          </ion-item>
-          <ion-item>
-            <ion-label>test</ion-label>
-            <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
-          </ion-item>
-          <ion-item>
-            <ion-label>test</ion-label>
-            <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
-          </ion-item>
-          <ion-item>
-            <ion-label>test</ion-label>
-            <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
-          </ion-item>
-        </ion-list>
-      </div>
-      
-      
-      
-      <ion-list>
-        <ion-item>
-          <ion-label>test</ion-label>
-          <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
+    <div *ngFor="let trip of trips">
+      <ion-accordion value="{{trip.value}}">
+        <ion-item slot="header" color="light">
+          <ion-label>{{trip.year}} | {{trip.country}} ({{trip.city}})</ion-label>
+          <ion-icon name="bicycle-outline" *ngIf="trip.transport === 'vélo'" ></ion-icon>
+          <ion-icon name="airplane-outline" *ngIf="trip.transport === 'avion'" ></ion-icon>
+          <ion-icon name="boat-outline" *ngIf="trip.transport === 'bateau'" ></ion-icon>
+          <ion-icon name="car-outline" *ngIf="trip.transport === 'voiture'" ></ion-icon>
         </ion-item>
-      </ion-list>
-
-
-
-    </ion-accordion>
-    <ion-accordion value="second">
-      <ion-item slot="header" color="light">
-        <ion-label>Second Accordion</ion-label>
-      </ion-item>
-      <div class="ion-padding" slot="content">
-        Second Content
-      </div>
-    </ion-accordion>
-    <ion-accordion value="third">
-      <ion-item slot="header" color="light">
-        <ion-label>Third Accordion</ion-label>
-      </ion-item>
-      <div class="ion-padding" slot="content">
-        Third Content
-      </div>
-    </ion-accordion>
+        <div class="ion-padding" slot="content">
+          <ion-list *ngFor="let article of trip.articles | keyvalue">
+            <ion-item>
+              <ion-label>{{article.key}}</ion-label>
+              <ion-checkbox color="primary" slot="end"></ion-checkbox>
+            </ion-item>
+            <ion-list *ngFor="let caract of article.value | keyvalue">
+              <ion-item><small>{{caract.key}} {{caract.value}}</small></ion-item>
+            </ion-list>
+          </ion-list>
+        </div>
+      </ion-accordion>
+    </div>
   </ion-accordion-group>
 
 </ion-content>
+ 
+
