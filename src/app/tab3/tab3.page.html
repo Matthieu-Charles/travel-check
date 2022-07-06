@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Conseils
+      Voyages
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,33 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
+      <ion-title size="large">Voyages</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <ion-accordion-group>
+    <div *ngFor="let trip of trips">
+      <ion-accordion value="{{trip.value}}">
+        <ion-item slot="header" color="light">
+          <ion-label>{{trip.year}} | {{trip.country}} ({{trip.city}})</ion-label>
+          <ion-icon name="bicycle-outline" *ngIf="trip.transport === 'vélo'" ></ion-icon>
+          <ion-icon name="airplane-outline" *ngIf="trip.transport === 'avion'" ></ion-icon>
+          <ion-icon name="boat-outline" *ngIf="trip.transport === 'bateau'" ></ion-icon>
+          <ion-icon name="car-outline" *ngIf="trip.transport === 'voiture'" ></ion-icon>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ion-list *ngFor="let article of trip.articles | keyvalue">
+            <ion-item>
+              <ion-label>{{article.key}}</ion-label>
+              <ion-checkbox color="primary" slot="end"></ion-checkbox>
+            </ion-item>
+            <ion-list *ngFor="let caract of article.value | keyvalue">
+              <ion-item><small>{{caract.key}} {{caract.value}}</small></ion-item>
+            </ion-list>
+          </ion-list>
+        </div>
+      </ion-accordion>
+    </div>
+  </ion-accordion-group>
+
 </ion-content>

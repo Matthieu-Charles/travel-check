@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { Trip, TripService } from '../trips.service';
+import { Component } from '@angular/core';
+import { PhotoService } from '../services/photo.service';
+
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page implements OnInit {
 
-  trips: Trip[] = [];
+export class Tab2Page {
 
-  constructor(
-    private tripService: TripService,
-  ) {}
+  constructor(public photoService: PhotoService) { }
 
-  ngOnInit() {
-    this.trips = this.tripService.getAll();
+  async ngOnInit() {
+    await this.photoService.loadSaved();
+  }
+  
+  addPhotoToGallery() {
+    this.photoService.addNewToGallery();
   }
 
 }
+
