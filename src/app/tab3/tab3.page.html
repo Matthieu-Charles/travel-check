@@ -28,6 +28,7 @@
             <ion-item>
               <ion-label>{{article.key}}</ion-label>
               <ion-checkbox color="primary" slot="end"></ion-checkbox>
+              <ion-icon (click)="addPhotoToGallery()" name="camera"></ion-icon>
             </ion-item>
             <ion-list *ngFor="let caract of article.value | keyvalue">
               <ion-item><small>{{caract.key}} {{caract.value}}</small></ion-item>
