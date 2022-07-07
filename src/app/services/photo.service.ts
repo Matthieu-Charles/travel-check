@@ -43,7 +43,9 @@ export class PhotoService {
       data: base64Data,
       directory: Directory.Data
     });
-  
+    
+    console.log(Directory.Data)
+
     // Use webPath to display the new image instead of base64 since it's
     // already loaded into memory
     return {
